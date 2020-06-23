@@ -1,21 +1,25 @@
-import * as DaqDevice from '../build/Release/mccdaq';
+import { Daq } from '../build/Release/mccdaq';
 
 function main() {
     const serial_number : string = 'L823763672';
-    const configuration = {
+
+    const settings = {
         high_channel: 16,
         low_channel: 1,
-        rate: 5000,
-        samples_per_channel: 1
+        sampleRate: 5000,
+        samplesPerSecond: 1
     };
-    const Daq: DaqDevice = new DaqDevice(serial_number);
 
-    Daq.initialize(configuration);
+    const device : Daq = new Daq(serial_number);
 
-    Daq.on('event', handle_event);
+    device.initialize(settings);
+
+    device.listen();
+
+    device.on('event', handle_event);
 }
 
-function handle_event(sensor_name: string, data: object) {
+function handle_event(sensor_name : string, data : object) {
     console.log(sensor_name);
     console.log(data);
 }

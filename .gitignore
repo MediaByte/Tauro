@@ -1,3 +1,10 @@
-build
 node_modules
 .vscode
+build/Release/.deps
+build/Release/obj.target
+build/Release/mccdaq.node
+*.gypi
+Makefile
+*.mk
+gyp-mac-tool
+*.MakeFile
