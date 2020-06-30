@@ -1,6 +1,6 @@
 {
     "targets": [{
-        "target_name": "mccdaq",
+        "target_name": "tauro",
         "sources": [ "lib/main.cpp" ],
         'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
         'cflags!': [ '-fno-exceptions' ],

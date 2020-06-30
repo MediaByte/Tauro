@@ -1,7 +1,5 @@
 #include <string>
 
-using namespace std;
-
 class Sample {
     public:
         unsigned int channels;
