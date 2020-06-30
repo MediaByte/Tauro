@@ -2,7 +2,7 @@ node_modules
 .vscode
 build/Release/.deps
 build/Release/obj.target
-build/Release/mccdaq.node
+build/Release/tauro.node
 *.gypi
 Makefile
 *.mk
