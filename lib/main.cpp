@@ -1,15 +1,10 @@
+// https://github.com/nodejs/node-addon-examples/tree/master/6_object_wrap/node-addon-api
+
 #include <napi.h>
+#include "tauro.h"
 
-Napi::Object CreateObject(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-  Napi::Object obj = Napi::Object::New(env);
-  obj.Set(Napi::String::New(env, "msg"), info[0].ToString());
-
-  return obj;
+Napi::Object InitTauro(Napi::Env env, Napi::Object exports) {
+  return Tauro::initialize(env, exports);
 }
 
-Napi::Object Init(Napi::Env env, Napi::Object exports) {
-  return Napi::Function::New(env, CreateObject, "createObject");
-}
-
-NODE_API_MODULE(addon, Init)
+NODE_API_MODULE(addon, InitTauro)

@@ -2,12 +2,12 @@
   "name": "tauro",
   "version": "1.0.0",
   "description": "Real-time (base) data aquisition system for analog sensors",
-  "main": "src/tauro.js",
+  "main": "examples/tauro.js",
   "scripts": {
     "test": "npm test",
-    "start": "node src/tauro.js",
+    "start": "node examples/tauro.js",
     "make": "node-gyp configure",
-    "build": "node-gyp rebuild",
+    "build": "node-gyp rebuild && cp tauro.d.ts build/Release/tauro.d.ts",
     "clean": "node-gyp clean"
   },
   "author": "Mario Martin",
