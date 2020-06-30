@@ -2,11 +2,6 @@
 
 using namespace std;
 
-/*
-    DATA MODEL:
-    Here we create a class responsible for structuring the I/O intensive data sets
-*/
-
 class Sample {
     public:
         unsigned int channels;

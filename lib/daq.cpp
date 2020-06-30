@@ -3,17 +3,6 @@
 
 using namespace std;
 
-/*
-    INTERFACE BRIDGE:
-    Here we create the class that is going to bridge communication between the V8 javascript runtime engine
-    and the MCC DAQ device Universal library.
-
-    MCC DAQ hardware driver (universal library) API reference in C++:
-    https://www.mccdaq.com/PDFs/Manuals/UL-Linux/c/index.html
-
-*/
-
-
 enum Status { ERROR, READY, RUNNING };
 
 class Daq {

@@ -1,17 +1,7 @@
 #include <string>
-#include <sample.h>
+#include "sample.h"
 
 using namespace std;
-
-/*
-    EVENT DRIVEN:
-    Here we create the class that is going to represent a single read from the data acquisition system. 
-    This blueprint provides a context for the user interface.
-
-    MCC DAQ hardware driver (universal library) API reference in C++:
-    https://www.mccdaq.com/PDFs/Manuals/UL-Linux/c/index.html
-
-*/
 
 class Event {
     public:
