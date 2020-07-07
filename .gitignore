@@ -8,3 +8,4 @@ Makefile
 *.mk
 gyp-mac-tool
 *.MakeFile
+.DS_Store
