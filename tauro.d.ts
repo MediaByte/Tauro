@@ -1,7 +1,8 @@
 declare enum Status {
-    ERROR,
-    READY,
-    RUNNING
+    ERROR = 0,
+    READY = 1,
+    RUNNING = 2,
+    CONFIGURE = 3
 }
 
 interface Config {
@@ -16,12 +17,10 @@ interface Config {
 
 export class Tauro {
     
-    public status : Status;
-    public on(event : string, cb : (event: string, buffer: object) => void) : void;
     public listen(): void;
+    public getStatus(): Status;
 
-    constructor(settings : Config);
+    constructor(rate: string, samples_per_channel: string, low_channel: string, high_channel: string, serial: string, input_mode: string, volts: string);
 
-    private options: Config;
 
 }
