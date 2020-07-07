@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+
+  tauro:
+    container_name: Tauro
+    build: ./
+    restart: always
+    command: npm start
+    working_dir: /usr/src/tauro
+    devices:
+      - '/dev:/dev'
+    privileged: true
+    ports:
+     - 5000:5000
+    environment:
+      PORT: 5000
+    volumes:
+      - ./build:/usr/src/tauro/build
