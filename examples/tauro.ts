@@ -1,13 +1,5 @@
-import { Tauro } from '../build/Release/tauro';
+import Tauro from '../src/tauro';
 
-function main({ rate, samples_per_channel, low_channel, high_channel, serial, input_mode, volts }) {
-
-    const device : Tauro = new Tauro(rate, samples_per_channel, low_channel, high_channel, serial, input_mode, volts);
-
-    device.listen();
-
-    console.log(device.getStatus());
-}
 
 const settings = {
     rate: '2500',
@@ -18,5 +10,14 @@ const settings = {
     input_mode: "DIFFERENTIAL",
     volts: '10',
 };
+
+function main({ rate, samples_per_channel, low_channel, high_channel, serial, input_mode, volts }) {
+
+    const device : Tauro = new Tauro(rate, samples_per_channel, low_channel, high_channel, serial, input_mode, volts);
+
+    device.listen();
+
+    console.log(device.getStatus());
+}
 
 main(settings);
