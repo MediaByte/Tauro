@@ -14,14 +14,25 @@
 class Daq {
     
     public:
-    Daq(string)
+        Daq(string);
+
         Status GetStatus();
-        void SetSampleRate(int);
+        
+        void SetSerial(string);
+        void SetSampleRate(double);
         void SetSamplesPerChannel(int);
         void SetLowChannel(int);
         void SetHighChannel(int);
         void SetInputMode(string);
         void SetVolts(string);
+        
+        void GetSerial(string);
+        void GetSampleRate(int);
+        void GetSamplesPerChannel(int);
+        void GetLowChannel(int);
+        void GetHighChannel(int);
+        void GetInputMode(string);
+        void GetVolts(string);
 
     private:
         std::string rate;

@@ -7,25 +7,34 @@ using namespace Napi;
   Constructor function for the Tauro Class
 */
 Tauro::Tauro(const Napi::CallbackInfo& info) : ObjectWrap<Tauro>(info) {
-  Napi::Env env = info.Env();
+  
+  try {
 
-  if (info.Length() < 6 ) {
-    Napi::TypeError::New(env, "Invalid argument count supplied.").ThrowAsJavaScriptException();
+    Napi::Env env = info.Env();
+
+    if (info.Length() < 6 ) {
+      Napi::TypeError::New(env, "Invalid argument count supplied.").ThrowAsJavaScriptException();
+    }
+
+    this->samples_per_channel = info[1].As<String>().Utf8Value();
+    this->high_channel = info[3].As<String>().Utf8Value();
+    this->low_channel = info[2].As<String>().Utf8Value();
+    this->input_mode = info[5].As<String>().Utf8Value();
+    this->serial = info[4].As<String>().Utf8Value();
+    this->volts = info[6].As<String>().Utf8Value();
+    this->rate = info[0].As<String>().Utf8Value();
     
-    return;
+    this->status = READY;
+  } 
+  
+  catch (const std::exception& err) {
+
+    using namespace std;
+
+    cout << "Error: " << err.what() << endl;
 
   }
-
-  this->rate =                info[0].As<String>().Utf8Value();
-  this->samples_per_channel = info[1].As<String>().Utf8Value();
-  this->low_channel =         info[2].As<String>().Utf8Value();
-  this->high_channel =        info[3].As<String>().Utf8Value();
-  this->serial =              info[4].As<String>().Utf8Value();
-  this->input_mode =          info[5].As<String>().Utf8Value();
-  this->volts =               info[6].As<String>().Utf8Value();
-
-
-  this->status = READY;
+  
 
 }
 

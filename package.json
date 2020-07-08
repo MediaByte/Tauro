@@ -1,13 +1,13 @@
 {
   "name": "tauro",
   "version": "1.0.0",
-  "description": "Real-time (base) data aquisition system for analog sensors",
+  "description": "A NodeJS interface of MCC Daq",
   "main": "examples/tauro.js",
   "scripts": {
     "test": "npm test",
     "start": "node examples/tauro.js",
     "make": "node-gyp configure",
-    "build": "node-gyp rebuild && cp tauro.d.ts build/Release/tauro.d.ts",
+    "build": "node-gyp rebuild && cp tauro.d.ts build/Release/tauro.d.ts && tsc examples/tauro.ts",
     "clean": "node-gyp clean"
   },
   "author": "Mario Martin",
