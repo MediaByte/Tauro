@@ -1,7 +1,7 @@
 {
     "targets": [{
         "target_name": "Tauro",
-        "sources": [ "lib/main.cpp", "lib/tauro.cpp" ],
+        "sources": [ "lib/main.cpp", "lib/tauro.cpp", "lib/daq.cpp" ],
         'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
         'cflags!': [ '-fno-exceptions' ],
         'cflags_cc!': [ '-fno-exceptions' ],

@@ -1,23 +1,14 @@
-#pragma once
-
 #ifndef TAURO_DAQ
 #define TAURO_DAQ
-
 
 #include <string>
 #include <iostream>
 
-#include "uldaq.h"
-#include "tauro.h"
-#include "utility.h"
+using namespace std;
 
 class Daq {
     
     public:
-        Daq(string);
-
-        Status GetStatus();
-        
         void SetSerial(string);
         void SetSampleRate(double);
         void SetSamplesPerChannel(int);
@@ -25,25 +16,26 @@ class Daq {
         void SetHighChannel(int);
         void SetInputMode(string);
         void SetVolts(string);
+        void SetChannelCount(int);
         
-        void GetSerial(string);
-        void GetSampleRate(int);
-        void GetSamplesPerChannel(int);
-        void GetLowChannel(int);
-        void GetHighChannel(int);
-        void GetInputMode(string);
-        void GetVolts(string);
+        string GetSerial();
+        double GetSampleRate();
+        int GetSamplesPerChannel();
+        int GetLowChannel();
+        int GetHighChannel();
+        string GetInputMode();
+        void GetVolts();
+        int GetChannelCount();
 
     private:
-        std::string rate;
-        std::string samples_per_channel;
-        std::string low_channel;
-        std::string high_channel;
-        std::string serial;
-        std::string input_mode;
-        std::string volts;
-
-        Status status;
+        double rate;
+        int channelCount;
+        int samples_per_channel;
+        int low_channel;
+        int high_channel;
+        string serial;
+        string input_mode;
+        string volts;
 
 };
 

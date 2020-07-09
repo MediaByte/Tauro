@@ -1,40 +1,79 @@
 #include <iostream>
 #include "tauro.h"
+#include "daq.h"
 
 using namespace Napi;
+using namespace std;
 
 /* 
   Constructor function for the Tauro Class
 */
 Tauro::Tauro(const Napi::CallbackInfo& info) : ObjectWrap<Tauro>(info) {
-  
+
   try {
 
-    Napi::Env env = info.Env();
+    int argsCount = info.Length();
 
-    if (info.Length() < 6 ) {
-      Napi::TypeError::New(env, "Invalid argument count supplied.").ThrowAsJavaScriptException();
+    if ( argsCount < 7 ) throw argsCount;
+
+    this->jsArgs = new string[argsCount];
+    
+    try {
+
+      for (int eachArgument = 0; eachArgument <= (int) info.Length() -1; eachArgument++) 
+
+        this->jsArgs[eachArgument] = info[eachArgument].As<String>().Utf8Value();
+
     }
 
-    this->samples_per_channel = info[1].As<String>().Utf8Value();
-    this->high_channel = info[3].As<String>().Utf8Value();
-    this->low_channel = info[2].As<String>().Utf8Value();
-    this->input_mode = info[5].As<String>().Utf8Value();
-    this->serial = info[4].As<String>().Utf8Value();
-    this->volts = info[6].As<String>().Utf8Value();
-    this->rate = info[0].As<String>().Utf8Value();
-    
-    this->status = READY;
+    catch(...) {
+
+      cout << "Exception was raised" << endl;
+
+    }
+
+    Status initialized = this->InitializeDevice();
+
+    if (initialized) this->status = initialized;
+
   } 
   
   catch (const std::exception& err) {
 
-    using namespace std;
-
     cout << "Error: " << err.what() << endl;
 
   }
+
+}
+
+Status Tauro::InitializeDevice() {
+
+  const Status returnValue = ERROR;
   
+  try {
+    
+    this->Device = new Daq();
+
+    this->Device->SetSerial(this->jsArgs[4]);
+    this->Device->SetSampleRate(stod(this->jsArgs[0]));
+    this->Device->SetSamplesPerChannel(stoi(this->jsArgs[1]));
+    this->Device->SetLowChannel(stoi(this->jsArgs[2]));
+    this->Device->SetHighChannel(stoi(this->jsArgs[3]));
+    this->Device->SetInputMode(this->jsArgs[5]);
+    this->Device->SetVolts(this->jsArgs[6]);
+    this->Device->SetChannelCount(stoi(this->jsArgs[7]));
+
+    return READY;
+
+  }
+
+  catch(std::exception& err) {
+
+    std::cout << "Error initializing Daq device " << err.what() << std::endl;
+
+  }
+
+  return returnValue;
 
 }
 
@@ -44,17 +83,19 @@ Tauro::Tauro(const Napi::CallbackInfo& info) : ObjectWrap<Tauro>(info) {
   (Work in progress)
 */
 Napi::Value Tauro::GetStatus(const Napi::CallbackInfo& info) {
+
   Napi::Env env = info.Env();
 
   Object returnValue = Napi::Object::New(env);
 
   returnValue.Set("status", (int) this->status);
   returnValue.Set("error", this->status == ERROR ? (bool) true : (bool) false);
+  returnValue.Set("device", (string) this->Device->GetSerial());
+
 
   return returnValue;
 
 }
-
 
 /* 
   Start a new (non-blocking) thread to handle the finite scan process.
