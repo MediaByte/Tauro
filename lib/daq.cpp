@@ -1,25 +1,72 @@
+#include <string>
 #include "daq.h"
 
-/*
-    Constructor Function for the Daq class
-*/
-Daq::Daq(const string serial) {
+#define MAX_DEV_COUNT  100
 
-    try {
+using namespace std; 
 
-        if (!serial) {
-            return;
-        }
+void Daq::SetSerial(string serial) {
 
-        this->SetSerial(serial);
+    this->serial = serial;
 
-    }
+}
 
-    catch (const std::exception& err) {
+void Daq::SetChannelCount(int count) {
 
-        using namespace std;
+    this->channelCount = count;
 
-        cout << err.what() << endl;
-        
-    }
+}
+
+void Daq::SetSampleRate(double rate) {
+
+    this->rate = rate;
+
+}
+
+void Daq::SetLowChannel(int low_channel) {
+
+    this->low_channel = low_channel;
+
+}
+
+void Daq::SetHighChannel(int high_channel) {
+
+    this->high_channel = high_channel;
+
+}
+
+void Daq::SetSamplesPerChannel(int samples_per_channel) {
+
+    this->samples_per_channel = samples_per_channel;
+
+}
+
+void Daq::SetInputMode(string input_mode) {
+
+    this->input_mode = input_mode;
+
+}
+
+void Daq::SetVolts(string volts) {
+
+    this->volts = volts;
+
+}
+
+string Daq::GetSerial() {
+
+    return this->serial;
+
+}
+
+double Daq::GetSampleRate() {
+
+    return this->rate;
+
+}
+
+int Daq::GetChannelCount() {
+
+    return this->channelCount;
+
 }

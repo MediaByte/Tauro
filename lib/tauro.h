@@ -1,12 +1,11 @@
-#pragma once
 
 #ifndef TAURO
 #define TAURO
 
 #include <napi.h>
-
+#include "daq.h"
+  
 enum Status { ERROR = 0, READY = 1, RUNNING = 2, CONFIGURE = 3 };
-
 class Tauro : public Napi::ObjectWrap<Tauro> {
   
   public:
@@ -16,15 +15,11 @@ class Tauro : public Napi::ObjectWrap<Tauro> {
     Napi::Value GetStatus(const Napi::CallbackInfo& info);
     
   private:  
-    std::string rate;
-    std::string samples_per_channel;
-    std::string low_channel;
-    std::string high_channel;
-    std::string serial;
-    std::string input_mode;
-    std::string volts;
+    std::string* jsArgs;
+    Daq* Device;
 
     Status status;
+    Status InitializeDevice();
 
 };
 

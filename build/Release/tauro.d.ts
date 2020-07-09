@@ -20,7 +20,7 @@ export class Tauro {
     public listen(): void;
     public getStatus(): Status;
 
-    constructor(rate: string, samples_per_channel: string, low_channel: string, high_channel: string, serial: string, input_mode: string, volts: string);
+    constructor(rate: string, samples_per_channel: string, low_channel: string, high_channel: string, serial: string, input_mode: string, volts: string, channel_count: string);
 
 
 }
